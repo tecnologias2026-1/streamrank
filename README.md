@@ -186,13 +186,77 @@ La aplicación deberá mantener una estructura visual clara y legible que facili
 🧠 4. Diagramas UML
 
 Diagrama de Casos de Uso
-
+CU–01 Registro de usuario
+El caso de uso de registro de usuario representa el proceso de creación de cuentas dentro del sistema. En este proceso, el usuario ingresa su información personal, la cual es validada por el sistema para garantizar que cumpla con los requisitos establecidos y que no existan duplicados. Posteriormente, los datos son almacenados en la base de datos, permitiendo que el usuario pueda acceder a funcionalidades personalizadas como listas, calificaciones y seguimiento de contenido.
 <img width="1064" height="399" alt="caso1" src="https://github.com/user-attachments/assets/c5866633-679b-4b75-92e0-b4a7c22ae646" />
+
+CU–02 Inicio de sesión
+El caso de uso de inicio de sesión corresponde al proceso de autenticación del usuario. En este, el sistema recibe las credenciales ingresadas, las valida mediante una consulta a la base de datos y determina si el acceso es permitido o no. Este proceso es fundamental para garantizar la seguridad del sistema y el acceso controlado a la información personal del usuario.
+<img width="1012" height="385" alt="caso2" src="https://github.com/user-attachments/assets/848e1711-7337-456f-ab25-10a48a9a4023" />
+
+CU–03 Gestión de perfil
+El caso de uso de gestión de perfil representa el proceso de administración de la información del usuario dentro del sistema. A través de este proceso, el usuario puede consultar, modificar y actualizar datos como listas personales, contenido visto, calificaciones y progreso de series. Este proceso se caracteriza por incluir operaciones de tipo CRUD (crear, leer, actualizar y eliminar), asegurando la persistencia y actualización constante de la información.
+<img width="780" height="471" alt="caso3" src="https://github.com/user-attachments/assets/7b4a74c8-d14f-463b-ae56-335a07cba198" />
+
+CU–04 Visualización de rankings
+El caso de uso de visualización de rankings corresponde al proceso de consulta y presentación de información. En este, el sistema accede a la base de datos, obtiene los datos previamente recolectados, genera dinámicamente un Top 10 según diferentes criterios y los presenta al usuario mediante una interfaz visual estructurada. Este proceso es uno de los principales del sistema, ya que permite la exploración del contenido.
+<img width="738" height="741" alt="caso4" src="https://github.com/user-attachments/assets/20f15cea-cdf9-462b-8a7d-b7ce742f89f1" />
+
+CU–05 Búsqueda de contenid
+El caso de uso de búsqueda de contenido representa el proceso de recuperación de información. En este proceso, el usuario ingresa un término de búsqueda, el sistema lo procesa y realiza una consulta en la base de datos para encontrar coincidencias. Finalmente, los resultados son devueltos y mostrados al usuario de manera organizada.
+<img width="735" height="310" alt="caso5" src="https://github.com/user-attachments/assets/2c7d0394-0ab0-461d-bf8d-1e62e43e45db" />
+
+CU–06 Visualización de contenido
+El caso de uso de visualización de contenido corresponde al proceso de presentación detallada de información. En este, el sistema muestra los datos específicos de una película o serie seleccionada, incluyendo elementos como título, imagen, rating, sinopsis y la posibilidad de reproducir el trailer. Este proceso mejora la experiencia del usuario al ofrecer información más completa sobre el contenido.
+<img width="744" height="298" alt="caso6" src="https://github.com/user-attachments/assets/9b034376-37f6-43db-ab4c-1533fec06d7f" />
+
+CU–07 Gestión de rankings personales
+El caso de uso de gestión de rankings personales representa el proceso de personalización del sistema. A través de este, el usuario puede crear listas propias de contenido, agregar elementos, organizarlos manualmente y almacenarlos en su perfil. Este proceso permite adaptar la experiencia del sistema a las preferencias individuales de cada usuario.
+<img width="793" height="315" alt="caso7" src="https://github.com/user-attachments/assets/86d31c81-36d9-4633-b438-fbffc8d75cda" />
+
+CU–08 Web scraping automático
+El caso de uso de web scraping automático corresponde al proceso de adquisición y actualización de datos del sistema. En este proceso, el sistema accede a fuentes externas, extrae información relevante como título, rating, género y otros atributos, la procesa y la almacena en la base de datos. Este proceso es fundamental para mantener la información actualizada y garantizar la generación de rankings dinámicos sin depender de consultas en tiempo real.
+<img width="904" height="408" alt="caso8" src="https://github.com/user-attachments/assets/fb93018e-c152-4d4e-bdfb-10faba1e8192" />
+
 
 
 Diagrama de Secuencia
 
-Explicar qué proceso representa.
+Diagrama de Secuencia – Registro de Usuario
+
+El diagrama de secuencia correspondiente al proceso de registro de usuario representa la interacción entre el usuario, la interfaz del sistema, el controlador y la base de datos. Inicialmente, el usuario ingresa sus datos a través de la interfaz, los cuales son enviados al controlador para su validación. Posteriormente, el sistema verifica en la base de datos si el usuario ya existe; en caso contrario, procede a almacenar la nueva información y confirmar el registro. Este flujo garantiza la correcta creación de cuentas y la integridad de los datos almacenados.
+<img width="723" height="578" alt="secuencia1" src="https://github.com/user-attachments/assets/3f1d144b-a4d9-4272-93c2-8ef1b0907cf4" />
+
+ Diagrama de Secuencia – Inicio de Sesión
+
+El diagrama de secuencia del inicio de sesión describe el proceso de autenticación del usuario dentro del sistema. El usuario introduce sus credenciales en la interfaz, las cuales son enviadas al controlador de autenticación. Este realiza una consulta a la base de datos para validar la información. Dependiendo del resultado, el sistema permite el acceso al usuario o muestra un mensaje de error. Este proceso asegura el control de acceso y la protección de la información personal.
+<img width="676" height="461" alt="secuencia2" src="https://github.com/user-attachments/assets/bbc5c319-9fa6-4ba7-9aa3-3b13ccc2b5c8" />
+
+Diagrama de Secuencia – Visualización de Rankings
+
+El diagrama de secuencia de visualización de rankings muestra cómo el usuario interactúa con el sistema para consultar el Top 10 de contenido. El usuario realiza la solicitud desde la interfaz, la cual es enviada al controlador de rankings. Este consulta la base de datos para obtener la información previamente almacenada, procesa los datos y retorna los resultados a la interfaz, donde son presentados en forma de tarjetas. Este flujo permite una visualización rápida y eficiente de la información.
+<img width="600" height="422" alt="secuencia3" src="https://github.com/user-attachments/assets/a290a6f9-5416-482e-8274-2cf59bb41124" />
+
+Diagrama de Secuencia – Filtrar y Ordenar Rankings
+
+El diagrama de secuencia de filtrado y ordenamiento de rankings representa la interacción necesaria para personalizar la visualización del contenido. El usuario selecciona diferentes criterios como género, tipo o duración, los cuales son enviados al controlador. Este realiza una consulta a la base de datos aplicando los filtros y criterios de ordenamiento seleccionados. Finalmente, los resultados son devueltos a la interfaz y mostrados al usuario. Este proceso permite una exploración más específica del contenido.
+<img width="650" height="372" alt="secuencia4" src="https://github.com/user-attachments/assets/21588d34-29dd-44f8-8be0-30976691387e" />
+
+ Diagrama de Secuencia – Búsqueda de Contenido
+
+El diagrama de secuencia de búsqueda de contenido describe el proceso mediante el cual el usuario encuentra películas o series específicas. El usuario introduce un término de búsqueda en la interfaz, que es enviado al controlador. Este realiza una consulta en la base de datos para encontrar coincidencias y retorna los resultados al sistema, donde son presentados al usuario. Este flujo permite una recuperación rápida y eficiente de información.
+<img width="605" height="357" alt="secuencia5" src="https://github.com/user-attachments/assets/634174b7-35f7-412f-a8e7-6df6cfd14b65" />
+
+ Diagrama de Secuencia – Gestión de Watchlist y Contenido Personal
+
+El diagrama de secuencia de gestión de contenido personal representa la interacción entre el usuario y el sistema para administrar listas como la watchlist, contenido visto o calificaciones. El usuario realiza una acción desde la interfaz, como agregar contenido o marcarlo como visto, la cual es enviada al controlador. Este procesa la solicitud y actualiza la base de datos, confirmando posteriormente la operación al usuario. Este proceso permite mantener actualizada la información personal del usuario.
+<img width="740" height="357" alt="secuencia6" src="https://github.com/user-attachments/assets/d51d6d45-a304-43dd-8ec8-4efe7cc33b22" />
+
+Diagrama de Secuencia – Web Scraping Automático
+
+El diagrama de secuencia del web scraping automático representa el proceso interno del sistema para la obtención de información externa. Un proceso programado inicia la ejecución del scraping, el cual accede a diferentes sitios web para extraer datos relevantes. Estos datos son enviados a un módulo de procesamiento que los organiza y valida antes de almacenarlos en la base de datos. Este flujo garantiza la actualización constante de la información sin intervención directa del usuario.
+<img width="800" height="443" alt="secuencia7" src="https://github.com/user-attachments/assets/284153bd-10a5-4f1e-977f-f86964f9e79b" />
+
 
 🎨 5. URL del Prototipo
 
