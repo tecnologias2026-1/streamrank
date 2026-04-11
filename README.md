@@ -1,4 +1,4 @@
-Para Completar por grupo
+
 
 🌐 Stream Rank
 
@@ -187,6 +187,7 @@ La aplicación deberá mantener una estructura visual clara y legible que facili
 
 Diagrama de Casos de Uso
 
+<img width="1064" height="399" alt="caso1" src="https://github.com/user-attachments/assets/c5866633-679b-4b75-92e0-b4a7c22ae646" />
 
 
 Diagrama de Secuencia
