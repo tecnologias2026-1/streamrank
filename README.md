@@ -2,7 +2,7 @@
 
 🌐 Stream Rank
 
-Escribe aquí una descripción corta del proyecto.
+Top10 de peliculas y series actualizado semanalamente utilizando WebScraping.
 
 👥 Integrantes
 
