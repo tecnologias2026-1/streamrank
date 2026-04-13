@@ -1,13 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Proyecto Web</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StreamRank</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand" aria-label="StreamRank">
+        <span class="brand-icon">
+          <img src="https://www.figma.com/api/mcp/asset/85b5d722-1636-44d9-aa5f-4d37b4220fb5" alt="StreamRank icon" />
+        </span>
+        <span class="brand-title"><span>Stream</span><span>Rank</span></span>
+      </div>
 
-  <h1>Hola, este es el proyecto</h1>
+      <div class="header-nav-row">
+        <nav class="main-nav" aria-label="Navegación principal">
+          <a href="#" class="nav-link">Inicio</a>
+          <a href="#" class="nav-link">Top 10</a>
+          <a href="#" class="nav-link nav-link-muted">
+            <span class="nav-icon">
+              <img src="https://www.figma.com/api/mcp/asset/76e25ff4-db16-4dd6-8a40-b7115513676e" alt="Mis Listas icon" />
+            </span>
+            Mis Listas
+          </a>
+        </nav>
 
-</body>
-</html>
+        <form class="search-form" id="searchForm">
+          <label class="search-field">
+            <span class="search-icon">
+              <img src="https://www.figma.com/api/mcp/asset/14162553-0f0e-436e-b980-db1ef67e9c08" alt="Buscar icon" />
+            </span>
+            <input id="searchInput" type="search" placeholder="Buscar" aria-label="Buscar" autocomplete="off" />
+          </label>
+        </form>
+      </div>
+
+      <button class="profile-button" type="button">
+        <span class="profile-icon">
+          <img src="https://www.figma.com/api/mcp/asset/a9d14a79-fa82-43e3-aca2-8d0a4125831c" alt="Perfil icon" />
+        </span>
+        Username
+      </button>
+    </div>
+  </header>
+
+  <main class="page-content"></main>
+
+  <footer class="footer">
+    <p class="footer-text">StreamRank ofrece las mejores listas y rankings de contenido audiovisual.</p>
+    <p class="footer-text">Diseñado para una experiencia clara, rápida y moderna.</p>
+  </footer>
+
