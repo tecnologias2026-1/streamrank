@@ -7,9 +7,9 @@ Top10 de peliculas y series actualizado semanalamente utilizando WebScraping.
 👥 Integrantes
 
 
-Paula Yurany Romero Rojas
-Laura Segura Castañeda-1202752
-Nicole Camila Enciso Velandia-1202795
+Paula Yurany Romero Rojas - 1202544
+Laura Segura Castañeda - 1202752
+Nicole Camila Enciso Velandia - 1202795
 
 
 🎯 1. Objetivo General
