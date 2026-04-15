@@ -1,3 +1,8 @@
+/* Oculta los ajustes de cuenta y su título por defecto */
+#ajustes-cuenta,
+#ajustes-titulo {
+  display: none !important;
+}
 :root {
   color-scheme: dark;
   /* Colores */

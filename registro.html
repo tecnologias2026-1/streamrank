@@ -57,10 +57,10 @@
     <h1 style="text-align: center; margin-top: 50px;">Bienvenido a StreamRank</h1>
 
     <!-- Título superior de la sección ajustes -->
-    <h1 style="text-align:center; color:#fff; font-size: 2.5rem; font-weight: 800; margin: 70px 0 24px 0; letter-spacing: -1px;">Ajustes de la Cuenta</h1>
+    <h1 id="ajustes-titulo" style="text-align:center; color:#fff; font-size: 2.5rem; font-weight: 800; margin: 70px 0 24px 0; letter-spacing: -1px;">Ajustes de la Cuenta</h1>
 
     <!-- Nueva sección: Ajustes de Cuenta (inspirada en Figma) -->
-    <section class="ajustes-cuenta" style="display: flex; flex-direction: column; align-items: center; margin: 0 0 60px 0;">
+    <section id="ajustes-cuenta" class="ajustes-cuenta" style="flex-direction: column; align-items: center; margin: 0 0 60px 0;">
       <div style="background: #0f172b; border-radius: 16px; width: 100%; max-width: 826px; padding: 16px; box-sizing: border-box;">
         <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 20px;">
           <!-- Foto de perfil -->
@@ -200,6 +200,16 @@
 
 
   <script>
+  // Mostrar ajustes solo si la sesión está activa
+  document.addEventListener('DOMContentLoaded', function() {
+    var sesion = localStorage.getItem('sesionRank');
+    var ajustes = document.getElementById('ajustes-cuenta');
+    var titulo = document.getElementById('ajustes-titulo');
+    if (sesion === 'activa') {
+      if (ajustes) ajustes.style.display = 'flex';
+      if (titulo) titulo.style.display = 'block';
+    }
+  });
   function abrirModal() {
     document.getElementById('modalOverlay').style.display = 'block';
     document.getElementById('modalLogin').style.display = 'flex';
