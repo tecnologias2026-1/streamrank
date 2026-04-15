@@ -55,6 +55,70 @@
 
   <main class="page-content">
     <h1 style="text-align: center; margin-top: 50px;">Bienvenido a StreamRank</h1>
+
+    <!-- Título superior de la sección ajustes -->
+    <h1 style="text-align:center; color:#fff; font-size: 2.5rem; font-weight: 800; margin: 70px 0 24px 0; letter-spacing: -1px;">Ajustes de la Cuenta</h1>
+
+    <!-- Nueva sección: Ajustes de Cuenta (inspirada en Figma) -->
+    <section class="ajustes-cuenta" style="display: flex; flex-direction: column; align-items: center; margin: 0 0 60px 0;">
+      <div style="background: #0f172b; border-radius: 16px; width: 100%; max-width: 826px; padding: 16px; box-sizing: border-box;">
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 20px;">
+          <!-- Foto de perfil -->
+          <div style="display: flex; gap: 32px; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; width: 100%;">
+            <div style="background: #1d293d; border: 2px solid #314158; border-radius: 50%; width: 96px; height: 96px; display: flex; align-items: center; justify-content: center;">
+              <span id="ajustes-inicial" style="color: #62748e; font-size: 36px; font-weight: bold;">U</span>
+            </div>
+            <div style="flex: 1; min-width: 0;">
+              <label style="color: #cad5e2; font-size: 14px; font-weight: 500;">URL de la Foto de Perfil</label>
+              <input type="url" id="ajustes-foto-url" placeholder="https://ejemplo.com/mifoto.jpg" style="width: 100%; background: #020618; border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; color: #62748e; font-size: 16px; padding: 8px 16px; margin-top: 4px; margin-bottom: 4px;" />
+              <small style="color: #62748e; font-size: 12px;">Pega la URL de una imagen para usarla como tu foto de perfil.</small>
+            </div>
+          </div>
+          <!-- Título -->
+          <div style="width: 100%;">
+            <h2 style="color: #fff; font-size: 24px; font-weight: bold; margin: 24px 0 8px 0;">Ajustes de Cuenta</h2>
+          </div>
+          <!-- Campos de usuario -->
+          <div style="width: 100%; display: flex; flex-direction: column; gap: 12px;">
+            <div>
+              <label style="color: #fff; font-size: 14px; font-weight: 500;">Nombre de Usuario</label>
+              <div style="display: flex; align-items: center; background: rgba(15,23,43,0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 33554400px; padding: 8px 11px; margin-top: 4px;">
+                <img src="https://www.figma.com/api/mcp/asset/7fade8e3-24da-4899-97b3-1508b00d82ee" alt="icono usuario" style="width: 20px; height: 20px; margin-right: 8px; opacity: 0.7;" />
+                <input type="text" id="ajustes-username" placeholder="Username" style="background: transparent; border: none; color: #455172; font-size: 16px; flex: 1; outline: none;" />
+              </div>
+            </div>
+            <div>
+              <label style="color: #fff; font-size: 14px; font-weight: 500;">Correo Electrónico (Solo Lectura)</label>
+              <div style="display: flex; align-items: center; background: rgba(15,23,43,0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 33554400px; padding: 8px 11px; margin-top: 4px;">
+                <img src="https://www.figma.com/api/mcp/asset/ad92531d-d2e0-4009-9c35-2d82d807f9de" alt="icono correo" style="width: 20px; height: 20px; margin-right: 8px; opacity: 0.7;" />
+                <input type="email" id="ajustes-email" placeholder="*********" style="background: transparent; border: none; color: #455172; font-size: 16px; flex: 1; outline: none;" readonly />
+              </div>
+            </div>
+            <div>
+              <label style="color: #fff; font-size: 14px; font-weight: 500;">Nueva Contraseña (Opcional)</label>
+              <div style="display: flex; align-items: center; background: rgba(15,23,43,0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 33554400px; padding: 8px 11px; margin-top: 4px;">
+                <img src="https://www.figma.com/api/mcp/asset/66f34685-1f90-487f-81f5-d08368334920" alt="icono contraseña" style="width: 20px; height: 20px; margin-right: 8px; opacity: 0.7;" />
+                <input type="password" id="ajustes-password" placeholder="*********" style="background: transparent; border: none; color: #455172; font-size: 16px; flex: 1; outline: none;" />
+              </div>
+            </div>
+          </div>
+          <!-- Botones -->
+          <div id="ajustes-aviso" style="display:none; justify-content: center; align-items: center; width: 100%; margin-bottom: 12px;">
+            <div style="background: #22c55e; color: #fff; border-radius: 8px; padding: 10px 24px; font-size: 16px; font-weight: 600; text-align: center;">Perfil actualizado correctamente.</div>
+          </div>
+          <div style="display: flex; gap: 20px; justify-content: center; width: 100%; margin-top: 12px;">
+            <button type="button" id="btnGuardarAjustes" style="background: #e7000b; color: #fff; border: 1px solid rgba(255,255,255,0.4); border-radius: 33px; font-weight: bold; font-size: 16px; padding: 9px 33px; box-shadow: 0 4px 4px 0 rgba(0,0,0,0.25); cursor: pointer; display: flex; align-items: center; gap: 8px;">
+              <img src="https://www.figma.com/api/mcp/asset/54260fce-d3f3-44ee-8075-d8f2ca104c51" alt="icono guardar" style="width: 18px; height: 18px;" />
+              Guardar Cambios
+            </button>
+            <button type="button" id="btnCerrarSesionAjustes" style="background: #e7000b; color: #fff; border: 1px solid rgba(255,255,255,0.4); border-radius: 33px; font-weight: bold; font-size: 16px; padding: 9px 33px; box-shadow: 0 4px 4px 0 rgba(0,0,0,0.25); cursor: pointer; display: flex; align-items: center; gap: 8px;">
+              <img src="https://www.figma.com/api/mcp/asset/d3545905-ee5f-4fd9-9ea1-a0cd98321c4d" alt="icono cerrar sesión" style="width: 18px; height: 18px;" />
+              Cerrar Sesión
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
 
@@ -156,17 +220,21 @@
     const email = document.getElementById('loginEmail').value.trim();
     const pass = document.getElementById('loginPassword').value.trim();
 
-    if (email && pass) {
-        // GUARDAMOS EL ESTADO: "sesion" = "activa"
-        localStorage.setItem('sesionRank', 'activa');
-        cerrarModal();
-        
-        // Refrescamos la página o vamos a mis listas
-        window.location.href = 'mis-listas.html'; 
-    } else {
-        alert('Por favor llena todos los campos');
+    if (!email || !pass) {
+      alert('Por favor llena todos los campos');
+      return;
     }
-}
+    if (!email.includes('@gmail')) {
+      alert('El correo debe contener "@gmail"');
+      return;
+    }
+    // GUARDAMOS EL ESTADO: "sesion" = "activa" y el correo
+    localStorage.setItem('sesionRank', 'activa');
+    localStorage.setItem('correoRank', email);
+    cerrarModal();
+    // Redirigimos al inicio
+    window.location.href = 'index.html';
+  }
 
   function abrirRegistro() {
     cerrarModal(); // Cerramos el de login si está abierto
@@ -193,16 +261,50 @@ function irALogin() {
 function simularRegistro() {
     const email = document.getElementById('regEmail').value.trim();
     const pass = document.getElementById('regPassword').value.trim();
-    
-    if (email && pass) {
-        alert('¡Cuenta creada con éxito! Ahora puedes iniciar sesión.');
-        irALogin();
-    } else {
-        alert('Por favor completa los datos de registro');
-    }
-}
-</script>
 
+    if (!email || !pass) {
+      alert('Por favor completa los datos de registro');
+      return;
+    }
+    if (!email.includes('@gmail')) {
+      alert('El correo debe contener "@gmail"');
+      return;
+    }
+    // Guardar correo y sesión
+    localStorage.setItem('sesionRank', 'activa');
+    localStorage.setItem('correoRank', email);
+    cerrarRegistro();
+    window.location.href = 'index.html';
+  // Cambiar el botón de ingresar por el correo si hay sesión activa
+  document.addEventListener('DOMContentLoaded', function() {
+    var btnIngresar = document.getElementById('btnIngresar');
+    var sesion = localStorage.getItem('sesionRank');
+    var correo = localStorage.getItem('correoRank');
+    if (btnIngresar && sesion === 'activa' && correo) {
+      btnIngresar.textContent = correo;
+    }
+  });
+  }
+
+document.addEventListener('DOMContentLoaded', function() {
+  var btnGuardar = document.getElementById('btnGuardarAjustes');
+  var aviso = document.getElementById('ajustes-aviso');
+  if (btnGuardar && aviso) {
+    btnGuardar.addEventListener('click', function() {
+      aviso.style.display = 'flex';
+      setTimeout(function() {
+        aviso.style.display = 'none';
+      }, 2200);
+    });
+  }
+  var btnCerrarSesion = document.getElementById('btnCerrarSesionAjustes');
+  if (btnCerrarSesion) {
+    btnCerrarSesion.addEventListener('click', function() {
+      window.location.href = 'index.html';
+    });
+  }
+});
+</script>
 </body>
 </html>
 
