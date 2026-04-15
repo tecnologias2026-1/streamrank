@@ -11,7 +11,7 @@
     <div class="topbar-inner">
       <div class="brand" aria-label="StreamRank">
         <span class="brand-icon">
-          <img src="https://www.figma.com/api/mcp/asset/85b5d722-1636-44d9-aa5f-4d37b4220fb5" alt="StreamRank icon" />
+          <img src="assets/icons/Clapperboard.svg" alt="StreamRank icon" />
         </span>
         <span class="brand-title"><span>Stream</span><span>Rank</span></span>
       </div>
@@ -22,7 +22,7 @@
           <a href="top10.html" class="nav-link">Top 10</a>
           <a href="#" class="nav-link">
             <span class="nav-icon">
-              <img src="https://www.figma.com/api/mcp/asset/76e25ff4-db16-4dd6-8a40-b7115513676e" alt="Mis Listas icon" />
+              <img src="assets/icons/Menu.svg" alt="Mis Listas icon" />
             </span>
             Mis Listas
           </a>
@@ -31,7 +31,7 @@
         <form class="search-form" id="searchForm">
           <label class="search-field">
             <span class="search-icon">
-              <img src="https://www.figma.com/api/mcp/asset/14162553-0f0e-436e-b980-db1ef67e9c08" alt="Buscar icon" />
+              <img src="assets/icons/Busqueda.svg" alt="Buscar icon" />
             </span>
             <input id="searchInput" type="search" placeholder="Buscar" aria-label="Buscar" autocomplete="off" />
           </label>
@@ -40,7 +40,7 @@
 
       <button class="profile-button" type="button">
         <span class="profile-icon">
-          <img src="https://www.figma.com/api/mcp/asset/a9d14a79-fa82-43e3-aca2-8d0a4125831c" alt="Perfil icon" />
+          <img src="assets/icons/Perfil.svg" alt="Perfil icon" />
         </span>
         Username
       </button>
@@ -48,12 +48,67 @@
   </header>
 
   <main class="page-content">
-    <h1 style="text-align: center; margin-top: 50px;">Bienvenido a StreamRank</h1>
-  </main>
+    
+    <section class="hero">
+        <div class="hero-info">
+            <span class="hero-tag">#1 GLOBAL · SERIE</span> 
+            
+            <div class="hero-title-container">
+                <h1 class="hero-title">Breaking Bad</h1>
+            </div>
+
+            <div class="hero-desc-container">
+                <p class="hero-description">
+                    A chemistry teacher diagnosed with cancer turns to manufacturing meth to secure his family's future.
+                </p>
+            </div>
+
+            <div class="hero-buttons">
+                <button class="btn btn-primary">
+                    <span class="icon">
+                        <img src="assets/icons/Play.svg" alt="Play icon" />  
+                    </span>
+                    <span class="btn-text">Ver Tráiler / info</span>
+                </button>
+                <button class="btn btn-secondary">
+                    <span class="icon">
+                        <img src="assets/icons/agregar.svg" alt="Agregar icon" />
+                    </span>
+                    <span class="btn-text">Agregar a la lista</span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="hero-image-container">
+           <img src="https://www.hdwallpapers.net/previews/breaking-bad-walter-white-271.jpg" alt="Portada de Breaking Bad" class="hero-image">
+        </div>
+    </section>
+    </main>
 
   <footer class="footer">
     <p class="footer-text">StreamRank ofrece las mejores listas y rankings de contenido audiovisual.</p>
     <p class="footer-text">Diseñado para una experiencia clara, rápida y moderna.</p>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const btnAgregar = document.querySelector('.btn-secondary');
+      
+      btnAgregar.addEventListener('click', function() {
+        this.classList.toggle('added');
+        
+        const icon = this.querySelector('.icon');
+        const text = this.querySelector('.btn-text');
+        
+        if (this.classList.contains('added')) {
+          icon.innerHTML = '<img src="assets/icons/agregada.svg" alt="Agregado" style="width: 20px; height: 20px; object-fit: contain;" />';
+          text.textContent = 'Agregado';
+        } else {
+          icon.innerHTML = '<img src="assets/icons/agregar.svg" alt="Agregar" style="width: 20px; height: 20px; object-fit: contain;" />'; 
+          text.textContent = 'Agregar a la lista';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
