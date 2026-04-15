@@ -592,6 +592,136 @@
         if (e.key === 'Escape' && modalOverlay.classList.contains('active')) closeModal();
     });
     });
+    const todasLasCartas = document.querySelectorAll('.movie-card');
+
+  function filtrarCartas() {
+    const tipoActivo = document.querySelector('.toggle-btn.active')?.dataset.tipo || 'todos';
+    const generoActivo = document.querySelector('.dropdown-btn[data-tipo="genero"]')?.dataset.valor || 'todos';
+    const duracionActiva = document.querySelector('.dropdown-btn[data-tipo="duracion"]')?.dataset.valor || 'todos';
+
+    todasLasCartas.forEach(card => {
+      const tipo = card.querySelector('.tag-type')?.textContent.trim().toLowerCase();
+      const genero = card.querySelector('.tag-genre')?.textContent.replace('•','').trim().toLowerCase();
+      const duracion = parseInt(card.dataset.duration) || 0;
+
+      let visible = true;
+
+      // Filtro tipo
+      if (tipoActivo === 'peliculas' && tipo !== 'película') visible = false;
+      if (tipoActivo === 'series' && tipo !== 'serie') visible = false;
+
+      // Filtro género
+      if (generoActivo !== 'todos' && !genero.includes(generoActivo)) visible = false;
+
+      // Filtro duración
+      if (duracionActiva === 'corta' && duracion > 100) visible = false;
+      if (duracionActiva === 'media' && (duracion <= 100 || duracion > 150)) visible = false;
+      if (duracionActiva === 'larga' && duracion <= 150) visible = false;
+
+      card.style.display = visible ? '' : 'none';
+    });
+
+    ordenarCartas();
+  }
+
+  function ordenarCartas() {
+    const ordenActivo = document.querySelector('.sort-btn.active')?.dataset.orden || 'rating';
+    const lista = document.querySelector('.top-10-list');
+    const cartas = [...lista.querySelectorAll('.movie-card')].filter(c => c.style.display !== 'none');
+
+    cartas.sort((a, b) => {
+      if (ordenActivo === 'rating') {
+        return parseFloat(b.querySelector('.rating-text')?.textContent || 0)
+             - parseFloat(a.querySelector('.rating-text')?.textContent || 0);
+      } else {
+        // popularidad = número de carta original
+        return parseInt(a.querySelector('.card-number')?.textContent || 0)
+             - parseInt(b.querySelector('.card-number')?.textContent || 0);
+      }
+    });
+
+    cartas.forEach(c => lista.appendChild(c));
+  }
+
+  // ── TOGGLE TIPO (Todos / Películas / Series) ──
+  const tipoMap = { 'Todos': 'todos', 'Películas': 'peliculas', 'Series': 'series' };
+  document.querySelectorAll('.toggle-btn').forEach(btn => {
+    btn.dataset.tipo = tipoMap[btn.querySelector('.btn-text')?.textContent.trim()] || 'todos';
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filtrarCartas();
+    });
+  });
+
+  // ── SORT (Rating / Popularidad) ──
+  const ordenMap = { 'Rating': 'rating', 'Popularidad': 'popularidad' };
+  document.querySelectorAll('.sort-btn').forEach(btn => {
+    btn.dataset.orden = ordenMap[btn.querySelector('.btn-text')?.textContent.trim()] || 'rating';
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filtrarCartas();
+    });
+  });
+
+  // ── DROPDOWNS ──
+  function crearDropdown(btnEl, tipo, opciones) {
+    btnEl.dataset.tipo = tipo;
+    btnEl.dataset.valor = 'todos';
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'dropdown-wrapper';
+    btnEl.parentNode.insertBefore(wrapper, btnEl);
+    wrapper.appendChild(btnEl);
+
+    const menu = document.createElement('div');
+    menu.className = 'dropdown-menu';
+    menu.innerHTML = opciones.map(o =>
+      `<button class="dropdown-option" data-valor="${o.valor}" type="button">${o.label}</button>`
+    ).join('');
+    wrapper.appendChild(menu);
+
+    btnEl.addEventListener('click', (e) => {
+      e.stopPropagation();
+      // Cerrar otros dropdowns
+      document.querySelectorAll('.dropdown-menu.open').forEach(m => {
+        if (m !== menu) m.classList.remove('open');
+      });
+      menu.classList.toggle('open');
+    });
+
+    menu.querySelectorAll('.dropdown-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        btnEl.dataset.valor = opt.dataset.valor;
+        btnEl.querySelector('.btn-text').textContent = opt.textContent;
+        menu.classList.remove('open');
+        filtrarCartas();
+      });
+    });
+  }
+
+  const dropdowns = document.querySelectorAll('.dropdown-btn');
+  crearDropdown(dropdowns[0], 'genero', [
+    { valor: 'todos', label: 'Todos los géneros' },
+    { valor: 'drama', label: 'Drama' },
+    { valor: 'crimen', label: 'Crimen' },
+    { valor: 'acción', label: 'Acción' },
+    { valor: 'thriller', label: 'Thriller' },
+    { valor: 'ciencia ficción', label: 'Ciencia Ficción' },
+  ]);
+  crearDropdown(dropdowns[1], 'duracion', [
+    { valor: 'todos', label: 'Cualquier duración' },
+    { valor: 'corta', label: 'Corta (< 100 min)' },
+    { valor: 'media', label: 'Media (100–150 min)' },
+    { valor: 'larga', label: 'Larga (> 150 min)' },
+  ]);
+
+  // Cerrar dropdowns al hacer clic afuera
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.dropdown-menu.open').forEach(m => m.classList.remove('open'));
+  });
+    
 </script>
 
 </body>
