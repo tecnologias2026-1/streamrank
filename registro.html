@@ -55,10 +55,42 @@
 
   <main class="page-content">
     <h1 style="text-align: center; margin-top: 50px;">Bienvenido a StreamRank</h1>
-
+    
     <!-- Título superior de la sección ajustes -->
     <h1 id="ajustes-titulo" style="display:none; text-align:center; color:#fff; font-size: 2.5rem; font-weight: 800; margin: 70px 0 24px 0; letter-spacing: -1px;">Ajustes de la Cuenta</h1>
+<!-- VISTA NO REGISTRADO -->
+<div id="noSesionView" style="
+  display:none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  background: #020618;
+  text-align: center;
+">
 
+  <h2 style="color:white; font-size:28px; margin-bottom:10px;">
+    Inicia sesión para ver tus listas
+  </h2>
+
+  <p style="color:#aaa; max-width:500px; margin-bottom:20px;">
+    Crea tu cuenta para guardar películas para ver después,
+    llevar un registro de lo que has visto y crear tus propios tops.
+  </p>
+
+  <button onclick="abrirModal()" style="
+    background:#e7000b;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:25px;
+    cursor:pointer;
+    font-weight:bold;
+  ">
+    Ingresar / Registrarse
+  </button>
+
+</div>
     <!-- Nueva sección: Ajustes de Cuenta (inspirada en Figma) -->
     <section id="ajustes-cuenta" class="ajustes-cuenta" style="display:none; flex-direction: column; align-items: center; margin: 0 0 60px 0;">
        
@@ -360,6 +392,11 @@ function actualizarEstadoUsuario() {
   const sesion = localStorage.getItem('sesionRank');
   const correo = localStorage.getItem('correoRank');
 
+  // 👇 IMPORTANTE: detectar en qué página estás
+  const esMisListas = window.location.pathname.includes("mis-listas.html");
+
+  const noSesionView = document.getElementById('noSesionView');
+
   if (sesion === 'activa' && correo) {
 
     btnIngresar.textContent = correo;
@@ -374,10 +411,22 @@ function actualizarEstadoUsuario() {
       titulo.scrollIntoView({ behavior: 'smooth' });
     };
 
+    // ✅ Si está logueado, ocultar vista de no sesión
+    if (noSesionView) noSesionView.style.display = 'none';
+
   } else {
+
     btnIngresar.textContent = 'Ingresar';
     btnIngresar.onclick = abrirModal;
 
+    // ✅ SOLO mostrar esta vista si estás en MIS LISTAS
+    if (esMisListas && noSesionView) {
+      noSesionView.style.display = 'flex';
+    } else if (noSesionView) {
+      noSesionView.style.display = 'none';
+    }
+
+    // Ocultar ajustes
     document.getElementById('ajustes-cuenta').style.display = 'none';
     document.getElementById('ajustes-titulo').style.display = 'none';
   }
