@@ -144,19 +144,21 @@
         </div>
 
         <div class="modal-campo">
-            <label class="modal-label" for="loginEmail">Correo electrónico</label>
-            <div class="modal-input-wrapper">
-                <span class="modal-input-icono">✉</span>
-                <input class="modal-input" id="loginEmail" type="email" placeholder="tu@correo.com" />
-            </div>
+          <label class="modal-label" for="loginEmail">Correo electrónico</label>
+          <div class="modal-input-wrapper">
+            <span class="modal-input-icono">✉</span>
+            <input class="modal-input" id="loginEmail" type="email" placeholder="tu@correo.com" oninput="ocultarAviso('loginEmailAviso')" />
+          </div>
+          <small id="loginEmailAviso" style="color:#e7000b; display:none; font-size:12px;">El correo debe contener "@gmail"</small>
         </div>
 
         <div class="modal-campo">
-            <label class="modal-label" for="loginPassword">Contraseña</label>
-            <div class="modal-input-wrapper">
-                <span class="modal-input-icono">🔒</span>
-                <input class="modal-input" id="loginPassword" type="password" placeholder="••••••••" />
-            </div>
+          <label class="modal-label" for="loginPassword">Contraseña</label>
+          <div class="modal-input-wrapper">
+            <span class="modal-input-icono">🔒</span>
+            <input class="modal-input" id="loginPassword" type="password" placeholder="••••••••" oninput="ocultarAviso('loginPasswordAviso')" />
+          </div>
+          <small id="loginPasswordAviso" style="color:#e7000b; display:none; font-size:12px;">La contraseña debe tener al menos 8 caracteres</small>
         </div>
 
         <button class="modal-btn-ingresar" type="button" onclick="simularLogin()">Ingresar</button>
@@ -174,20 +176,23 @@
             <p class="modal-subtitulo">Regístrate por primera vez con tu correo electrónico.</p>
         </div>
 
+
         <div class="modal-campo">
-            <label class="modal-label" for="regEmail">Correo electrónico</label>
-            <div class="modal-input-wrapper">
-                <span class="modal-input-icono">✉</span>
-                <input class="modal-input" id="regEmail" type="email" placeholder="tu@correo.com" />
-            </div>
+          <label class="modal-label" for="regEmail">Correo electrónico</label>
+          <div class="modal-input-wrapper">
+            <span class="modal-input-icono">✉</span>
+            <input class="modal-input" id="regEmail" type="email" placeholder="tu@correo.com" oninput="ocultarAviso('regEmailAviso')" />
+          </div>
+          <small id="regEmailAviso" style="color:#e7000b; display:none; font-size:12px;">El correo debe contener "@gmail"</small>
         </div>
 
         <div class="modal-campo">
-            <label class="modal-label" for="regPassword">Contraseña</label>
-            <div class="modal-input-wrapper">
-                <span class="modal-input-icono">🔒</span>
-                <input class="modal-input" id="regPassword" type="password" placeholder="••••••••" />
-            </div>
+          <label class="modal-label" for="regPassword">Contraseña</label>
+          <div class="modal-input-wrapper">
+            <span class="modal-input-icono">🔒</span>
+            <input class="modal-input" id="regPassword" type="password" placeholder="••••••••" oninput="ocultarAviso('regPasswordAviso')" />
+          </div>
+          <small id="regPasswordAviso" style="color:#e7000b; display:none; font-size:12px;">La contraseña debe tener al menos 8 caracteres</small>
         </div>
 
         <button class="modal-btn-ingresar" type="button" onclick="simularRegistro()">Registrarse</button>
@@ -229,21 +234,45 @@
   function simularLogin() {
     const email = document.getElementById('loginEmail').value.trim();
     const pass = document.getElementById('loginPassword').value.trim();
+    var emailAviso = document.getElementById('loginEmailAviso');
+    var passAviso = document.getElementById('loginPasswordAviso');
+    let error = false;
 
     if (!email || !pass) {
-      alert('Por favor llena todos los campos');
+      if (emailAviso) { emailAviso.textContent = 'Por favor llena todos los campos'; emailAviso.style.display = 'block'; }
+      if (passAviso) { passAviso.textContent = 'Por favor llena todos los campos'; passAviso.style.display = 'block'; }
       return;
     }
     if (!email.includes('@gmail')) {
-      alert('El correo debe contener "@gmail"');
-      return;
+      if (emailAviso) {
+        emailAviso.textContent = 'El correo debe contener "@gmail"';
+        emailAviso.style.display = 'block';
+      }
+      error = true;
+    } else {
+      if (emailAviso) emailAviso.style.display = 'none';
     }
+    if (pass.length < 8) {
+      if (passAviso) {
+        passAviso.textContent = 'La contraseña debe tener al menos 8 caracteres';
+        passAviso.style.display = 'block';
+      }
+      error = true;
+    } else {
+      if (passAviso) passAviso.style.display = 'none';
+    }
+    if (error) return;
     // GUARDAMOS EL ESTADO: "sesion" = "activa" y el correo
     localStorage.setItem('sesionRank', 'activa');
     localStorage.setItem('correoRank', email);
     cerrarModal();
     // Redirigimos al inicio
     window.location.href = 'index.html';
+  }
+
+  function ocultarAviso(id) {
+    var aviso = document.getElementById(id);
+    if (aviso) aviso.style.display = 'none';
   }
 
   function abrirRegistro() {
@@ -271,30 +300,49 @@ function irALogin() {
 function simularRegistro() {
     const email = document.getElementById('regEmail').value.trim();
     const pass = document.getElementById('regPassword').value.trim();
+    var emailAviso = document.getElementById('regEmailAviso');
+    var passAviso = document.getElementById('regPasswordAviso');
+    let error = false;
 
     if (!email || !pass) {
-      alert('Por favor completa los datos de registro');
+      if (emailAviso) { emailAviso.textContent = 'Por favor completa los datos de registro'; emailAviso.style.display = 'block'; }
+      if (passAviso) { passAviso.textContent = 'Por favor completa los datos de registro'; passAviso.style.display = 'block'; }
       return;
     }
     if (!email.includes('@gmail')) {
-      alert('El correo debe contener "@gmail"');
-      return;
+      if (emailAviso) {
+        emailAviso.textContent = 'El correo debe contener "@gmail"';
+        emailAviso.style.display = 'block';
+      }
+      error = true;
+    } else {
+      if (emailAviso) emailAviso.style.display = 'none';
     }
+    if (pass.length < 8) {
+      if (passAviso) {
+        passAviso.textContent = 'La contraseña debe tener al menos 8 caracteres';
+        passAviso.style.display = 'block';
+      }
+      error = true;
+    } else {
+      if (passAviso) passAviso.style.display = 'none';
+    }
+    if (error) return;
     // Guardar correo y sesión
     localStorage.setItem('sesionRank', 'activa');
     localStorage.setItem('correoRank', email);
     cerrarRegistro();
     window.location.href = 'index.html';
-  // Cambiar el botón de ingresar por el correo si hay sesión activa
-  document.addEventListener('DOMContentLoaded', function() {
-    var btnIngresar = document.getElementById('btnIngresar');
-    var sesion = localStorage.getItem('sesionRank');
-    var correo = localStorage.getItem('correoRank');
-    if (btnIngresar && sesion === 'activa' && correo) {
-      btnIngresar.textContent = correo;
-    }
-  });
-  }
+    // Cambiar el botón de ingresar por el correo si hay sesión activa
+    document.addEventListener('DOMContentLoaded', function() {
+      var btnIngresar = document.getElementById('btnIngresar');
+      var sesion = localStorage.getItem('sesionRank');
+      var correo = localStorage.getItem('correoRank');
+      if (btnIngresar && sesion === 'activa' && correo) {
+        btnIngresar.textContent = correo;
+      }
+    });
+}
 
 document.addEventListener('DOMContentLoaded', function() {
   var btnGuardar = document.getElementById('btnGuardarAjustes');
