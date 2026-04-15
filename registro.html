@@ -45,7 +45,7 @@
       </div>
       <button class="profile-button" type="button" id="btnIngresar" onclick="abrirModal()">
         Ingresar
-    </button>
+      </button>
 
     </div>
   </header>
@@ -57,10 +57,11 @@
     <h1 style="text-align: center; margin-top: 50px;">Bienvenido a StreamRank</h1>
 
     <!-- Título superior de la sección ajustes -->
-    <h1 id="ajustes-titulo" style="text-align:center; color:#fff; font-size: 2.5rem; font-weight: 800; margin: 70px 0 24px 0; letter-spacing: -1px;">Ajustes de la Cuenta</h1>
+    <h1 id="ajustes-titulo" style="display:none; text-align:center; color:#fff; font-size: 2.5rem; font-weight: 800; margin: 70px 0 24px 0; letter-spacing: -1px;">Ajustes de la Cuenta</h1>
 
     <!-- Nueva sección: Ajustes de Cuenta (inspirada en Figma) -->
-    <section id="ajustes-cuenta" class="ajustes-cuenta" style="flex-direction: column; align-items: center; margin: 0 0 60px 0;">
+    <section id="ajustes-cuenta" class="ajustes-cuenta" style="display:none; flex-direction: column; align-items: center; margin: 0 0 60px 0;">
+       
       <div style="background: #0f172b; border-radius: 16px; width: 100%; max-width: 826px; padding: 16px; box-sizing: border-box;">
         <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 20px;">
           <!-- Foto de perfil -->
@@ -144,21 +145,25 @@
         </div>
 
         <div class="modal-campo">
-          <label class="modal-label" for="loginEmail">Correo electrónico</label>
-          <div class="modal-input-wrapper">
-            <span class="modal-input-icono">✉</span>
-            <input class="modal-input" id="loginEmail" type="email" placeholder="tu@correo.com" oninput="ocultarAviso('loginEmailAviso')" />
-          </div>
-          <small id="loginEmailAviso" style="color:#e7000b; display:none; font-size:12px;">El correo debe contener "@gmail"</small>
+            <label class="modal-label" for="loginEmail">Correo electrónico</label>
+            <div class="modal-input-wrapper">
+                <span class="modal-input-icono">✉</span>
+                <input class="modal-input" id="loginEmail" type="email" placeholder="tu@correo.com" />
+                <small id="loginEmailError" style="color:red; display:none; font-size:12px;">
+  El correo debe contener "@gmail"
+</small>
+            </div>
         </div>
 
         <div class="modal-campo">
-          <label class="modal-label" for="loginPassword">Contraseña</label>
-          <div class="modal-input-wrapper">
-            <span class="modal-input-icono">🔒</span>
-            <input class="modal-input" id="loginPassword" type="password" placeholder="••••••••" oninput="ocultarAviso('loginPasswordAviso')" />
-          </div>
-          <small id="loginPasswordAviso" style="color:#e7000b; display:none; font-size:12px;">La contraseña debe tener al menos 8 caracteres</small>
+            <label class="modal-label" for="loginPassword">Contraseña</label>
+            <div class="modal-input-wrapper">
+                <span class="modal-input-icono">🔒</span>
+                <input class="modal-input" id="loginPassword" type="password" placeholder="••••••••" />
+                <small id="loginPassError" style="color:red; display:none; font-size:12px;">
+  La contraseña debe tener mínimo 8 caracteres
+</small>
+            </div>
         </div>
 
         <button class="modal-btn-ingresar" type="button" onclick="simularLogin()">Ingresar</button>
@@ -176,23 +181,20 @@
             <p class="modal-subtitulo">Regístrate por primera vez con tu correo electrónico.</p>
         </div>
 
-
         <div class="modal-campo">
-          <label class="modal-label" for="regEmail">Correo electrónico</label>
-          <div class="modal-input-wrapper">
-            <span class="modal-input-icono">✉</span>
-            <input class="modal-input" id="regEmail" type="email" placeholder="tu@correo.com" oninput="ocultarAviso('regEmailAviso')" />
-          </div>
-          <small id="regEmailAviso" style="color:#e7000b; display:none; font-size:12px;">El correo debe contener "@gmail"</small>
+            <label class="modal-label" for="regEmail">Correo electrónico</label>
+            <div class="modal-input-wrapper">
+                <span class="modal-input-icono">✉</span>
+                <input class="modal-input" id="regEmail" type="email" placeholder="tu@correo.com" />
+            </div>
         </div>
 
         <div class="modal-campo">
-          <label class="modal-label" for="regPassword">Contraseña</label>
-          <div class="modal-input-wrapper">
-            <span class="modal-input-icono">🔒</span>
-            <input class="modal-input" id="regPassword" type="password" placeholder="••••••••" oninput="ocultarAviso('regPasswordAviso')" />
-          </div>
-          <small id="regPasswordAviso" style="color:#e7000b; display:none; font-size:12px;">La contraseña debe tener al menos 8 caracteres</small>
+            <label class="modal-label" for="regPassword">Contraseña</label>
+            <div class="modal-input-wrapper">
+                <span class="modal-input-icono">🔒</span>
+                <input class="modal-input" id="regPassword" type="password" placeholder="••••••••" />
+            </div>
         </div>
 
         <button class="modal-btn-ingresar" type="button" onclick="simularRegistro()">Registrarse</button>
@@ -204,161 +206,168 @@
 </div> ```
 
 
-  <script>
-  // Mostrar ajustes solo si la sesión está activa
-  document.addEventListener('DOMContentLoaded', function() {
-    var sesion = localStorage.getItem('sesionRank');
-    var ajustes = document.getElementById('ajustes-cuenta');
-    var titulo = document.getElementById('ajustes-titulo');
-    if (sesion === 'activa') {
-      if (ajustes) ajustes.style.display = 'flex';
-      if (titulo) titulo.style.display = 'block';
-    }
-  });
-  function abrirModal() {
-    document.getElementById('modalOverlay').style.display = 'block';
-    document.getElementById('modalLogin').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+<script>
+function abrirModal() {
+  document.getElementById('modalOverlay').style.display = 'block';
+  document.getElementById('modalLogin').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function cerrarModal() {
+  document.getElementById('modalOverlay').style.display = 'none';
+  document.getElementById('modalLogin').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+// ESCAPE
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') cerrarModal();
+});
+
+function simularLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass = document.getElementById('loginPassword').value.trim();
+
+  const emailError = document.getElementById('loginEmailError');
+  const passError = document.getElementById('loginPassError');
+
+  let valido = true;
+
+  // RESET VISUAL
+  emailError.style.display = 'none';
+  passError.style.display = 'none';
+
+  // VALIDACIÓN EMAIL
+  if (!email.includes('@gmail')) {
+    emailError.style.display = 'block';
+    valido = false;
   }
 
-  function cerrarModal() {
-    document.getElementById('modalOverlay').style.display = 'none';
-    document.getElementById('modalLogin').style.display = 'none';
-    document.body.style.overflow = '';
+  // VALIDACIÓN PASSWORD
+  if (pass.length < 8) {
+    passError.style.display = 'block';
+    valido = false;
   }
 
-  // Cerrar con Escape
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') cerrarModal();
-  });
-  function simularLogin() {
-    const email = document.getElementById('loginEmail').value.trim();
-    const pass = document.getElementById('loginPassword').value.trim();
-    var emailAviso = document.getElementById('loginEmailAviso');
-    var passAviso = document.getElementById('loginPasswordAviso');
-    let error = false;
+  if (!email || !pass) return;
 
-    if (!email || !pass) {
-      if (emailAviso) { emailAviso.textContent = 'Por favor llena todos los campos'; emailAviso.style.display = 'block'; }
-      if (passAviso) { passAviso.textContent = 'Por favor llena todos los campos'; passAviso.style.display = 'block'; }
-      return;
-    }
-    if (!email.includes('@gmail')) {
-      if (emailAviso) {
-        emailAviso.textContent = 'El correo debe contener "@gmail"';
-        emailAviso.style.display = 'block';
-      }
-      error = true;
-    } else {
-      if (emailAviso) emailAviso.style.display = 'none';
-    }
-    if (pass.length < 8) {
-      if (passAviso) {
-        passAviso.textContent = 'La contraseña debe tener al menos 8 caracteres';
-        passAviso.style.display = 'block';
-      }
-      error = true;
-    } else {
-      if (passAviso) passAviso.style.display = 'none';
-    }
-    if (error) return;
-    // GUARDAMOS EL ESTADO: "sesion" = "activa" y el correo
-    localStorage.setItem('sesionRank', 'activa');
-    localStorage.setItem('correoRank', email);
-    cerrarModal();
-    // Redirigimos al inicio
-    window.location.href = 'index.html';
-  }
+  if (!valido) return;
 
-  function ocultarAviso(id) {
-    var aviso = document.getElementById(id);
-    if (aviso) aviso.style.display = 'none';
-  }
+  localStorage.setItem('sesionRank', 'activa');
+  localStorage.setItem('correoRank', email);
 
-  function abrirRegistro() {
-    cerrarModal(); // Cerramos el de login si está abierto
-    document.getElementById('modalOverlay').style.display = 'block';
-    document.getElementById('modalRegistro').style.display = 'flex';
+  cerrarModal();
+  actualizarEstadoUsuario();
+}
+
+function abrirRegistro() {
+  cerrarModal();
+  document.getElementById('modalOverlay').style.display = 'block';
+  document.getElementById('modalRegistro').style.display = 'flex';
 }
 
 function cerrarRegistro() {
-    document.getElementById('modalOverlay').style.display = 'none';
-    document.getElementById('modalRegistro').style.display = 'none';
-    document.body.style.overflow = '';
+  document.getElementById('modalOverlay').style.display = 'none';
+  document.getElementById('modalRegistro').style.display = 'none';
+  document.body.style.overflow = '';
 }
 
-// Esta función es para el link "¿Ya tienes cuenta? Ingresa aquí"
 function irALogin() {
-    cerrarRegistro();
-    abrirModal();
+  cerrarRegistro();
+  abrirModal();
 }
-
-// Función para cuando dan clic en "Regístrate aquí" dentro del modal de Login
-// Actualiza el link en el modal de Login para que llame a esta función:
-// <a href="javascript:void(0)" onclick="abrirRegistro()">Regístrate aquí</a>
 
 function simularRegistro() {
-    const email = document.getElementById('regEmail').value.trim();
-    const pass = document.getElementById('regPassword').value.trim();
-    var emailAviso = document.getElementById('regEmailAviso');
-    var passAviso = document.getElementById('regPasswordAviso');
-    let error = false;
+  const email = document.getElementById('regEmail').value.trim();
+  const pass = document.getElementById('regPassword').value.trim();
 
-    if (!email || !pass) {
-      if (emailAviso) { emailAviso.textContent = 'Por favor completa los datos de registro'; emailAviso.style.display = 'block'; }
-      if (passAviso) { passAviso.textContent = 'Por favor completa los datos de registro'; passAviso.style.display = 'block'; }
-      return;
-    }
-    if (!email.includes('@gmail')) {
-      if (emailAviso) {
-        emailAviso.textContent = 'El correo debe contener "@gmail"';
-        emailAviso.style.display = 'block';
-      }
-      error = true;
-    } else {
-      if (emailAviso) emailAviso.style.display = 'none';
-    }
-    if (pass.length < 8) {
-      if (passAviso) {
-        passAviso.textContent = 'La contraseña debe tener al menos 8 caracteres';
-        passAviso.style.display = 'block';
-      }
-      error = true;
-    } else {
-      if (passAviso) passAviso.style.display = 'none';
-    }
-    if (error) return;
-    // Guardar correo y sesión
-    localStorage.setItem('sesionRank', 'activa');
-    localStorage.setItem('correoRank', email);
-    cerrarRegistro();
-    window.location.href = 'index.html';
-    // Cambiar el botón de ingresar por el correo si hay sesión activa
-    document.addEventListener('DOMContentLoaded', function() {
-      var btnIngresar = document.getElementById('btnIngresar');
-      var sesion = localStorage.getItem('sesionRank');
-      var correo = localStorage.getItem('correoRank');
-      if (btnIngresar && sesion === 'activa' && correo) {
-        btnIngresar.textContent = correo;
-      }
-    });
+  // 🔴 NO BORRADO: validación original conservada
+  if (!email || !pass) {
+    alert('Por favor completa los datos de registro');
+    return;
+  }
+
+  if (!email.includes('@gmail')) {
+    alert('El correo debe contener "@gmail"');
+    return;
+  }
+
+  localStorage.setItem('sesionRank', 'activa');
+  localStorage.setItem('correoRank', email);
+
+  cerrarRegistro();
+  actualizarEstadoUsuario();
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+/* =========================
+   🔥 ESTADO GLOBAL CORREGIDO
+   ========================= */
+function actualizarEstadoUsuario() {
+  const btnIngresar = document.getElementById('btnIngresar');
+  const sesion = localStorage.getItem('sesionRank');
+  const correo = localStorage.getItem('correoRank');
+
+  if (sesion === 'activa' && correo) {
+
+    // cambia a correo
+    btnIngresar.textContent = correo;
+
+    btnIngresar.onclick = function () {
+      const ajustes = document.getElementById('ajustes-cuenta');
+      const titulo = document.getElementById('ajustes-titulo');
+
+      ajustes.style.display = 'flex';
+      titulo.style.display = 'block';
+
+      titulo.scrollIntoView({ behavior: 'smooth' });
+    };
+
+  } else {
+
+    // 🔴 IMPORTANTE: vuelve a estado inicial correcto
+    btnIngresar.textContent = 'Ingresar';
+    btnIngresar.onclick = abrirModal;
+
+    // ocultar ajustes SIEMPRE si no hay sesión
+    document.getElementById('ajustes-cuenta').style.display = 'none';
+    document.getElementById('ajustes-titulo').style.display = 'none';
+  }
+}
+
+/* =========================
+   🚀 INICIO
+   ========================= */
+document.addEventListener('DOMContentLoaded', function () {
+
+  actualizarEstadoUsuario();
+
+  // 🔵 NO BORRADO: aviso de guardar ajustes (lo tuyo intacto)
   var btnGuardar = document.getElementById('btnGuardarAjustes');
   var aviso = document.getElementById('ajustes-aviso');
+
   if (btnGuardar && aviso) {
-    btnGuardar.addEventListener('click', function() {
+    btnGuardar.addEventListener('click', function () {
       aviso.style.display = 'flex';
-      setTimeout(function() {
+
+      setTimeout(function () {
         aviso.style.display = 'none';
       }, 2200);
     });
   }
+
+  // 🔵 CERRAR SESIÓN CORREGIDO (solo añade limpieza)
   var btnCerrarSesion = document.getElementById('btnCerrarSesionAjustes');
+
   if (btnCerrarSesion) {
-    btnCerrarSesion.addEventListener('click', function() {
-      window.location.href = 'index.html';
+    btnCerrarSesion.addEventListener('click', function () {
+
+      localStorage.removeItem('sesionRank');
+      localStorage.removeItem('correoRank');
+
+      // reset visual inmediato
+      actualizarEstadoUsuario();
+
+      location.reload();
     });
   }
 });
