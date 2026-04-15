@@ -1189,46 +1189,6 @@ body.modal-open {
 .card-starwars { background-image: linear-gradient(0deg, rgba(0,0,0,0.7), rgba(0,0,0,0.4)), url('https://static.wikia.nocookie.net/esstarwars/images/4/42/StarWarsOpeningLogo.svg/revision/latest?cb=20161007015630'); }
 .card-universal { background-image: linear-gradient(0deg, rgba(0,0,0,0.7), rgba(0,0,0,0.4)), url('https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/img_4543png.png'); }
 
-
-.card-subtitle {
-  display: flex;
-  width: 244px;
-  height: 16px;
-  align-items: flex-start;
-  flex-shrink: 0;
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 16px;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-}
-
-/* Colores específicos para cada categoría */
-.subtitle-plataforma { color: #FF6467; }
-.subtitle-estudio { color: #5686E1; }
-.subtitle-saga { color: #8B2CF4; }
-
-.card-title {
-  flex: 1 0 0;
-  color: #FFF;
-  font-family: 'Inter', sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 32px;
-}
-
-/* Responsive */
-@media (max-width: 700px) {
-  .platform-card {
-    width: 100%;
-    height: auto;
-    min-height: 120px;
-  }
-  .card-subtitle, .card-title {
-    width: auto;
-  }
-}
 /* ── DROPDOWNS ── */
 .dropdown-wrapper {
   position: relative;
@@ -1271,3 +1231,45 @@ body.modal-open {
   background: rgba(255, 255, 255, 0.06);
   color: #ffffff;
 }
+
+
+.card-subtitle {
+  display: flex;
+  width: 244px;
+  height: 16px;
+  align-items: flex-start;
+  flex-shrink: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+/* Colores específicos para cada categoría */
+.subtitle-plataforma { color: #FF6467; }
+.subtitle-estudio { color: #5686E1; }
+.subtitle-saga { color: #8B2CF4; }
+
+.card-title {
+  flex: 1 0 0;
+  color: #FFF;
+  font-family: 'Inter', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .platform-card {
+    width: 100%;
+    height: auto;
+    min-height: 120px;
+  }
+  .card-subtitle, .card-title {
+    width: auto;
+  }
+}
+
