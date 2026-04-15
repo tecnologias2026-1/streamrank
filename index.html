@@ -539,6 +539,57 @@
     <p class="footer-text">Diseñado para una experiencia clara, rápida y moderna.</p>
   </footer>
 
+<!-- MODAL FLOTANTE - ESTRUCTURA HTML COMPLETA -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="floating-card">
+    <!-- Cabecera fija con la X -->
+    <div class="modal-header">
+      <button class="modal-close-btn" id="closeModalBtn">✕</button>
+    </div>
+
+    <!-- Contenido scrollable -->
+    <div class="modal-content">
+      <!-- Tags: SERIE + Drama -->
+      <div class="modal-tags">
+        <span class="tag-type" id="modalType">SERIE</span>
+        <span class="tag-genre" id="modalGenre">• Drama</span>
+      </div>
+
+      <!-- Título -->
+      <h3 class="info-title" id="modalTitle">Breaking Bad</h3>
+
+      <!-- Fila de rating + duración -->
+      <div class="modal-rating-duration">
+        <!-- Bloque de rating (dorado) -->
+        <div class="info-rating">
+          <div class="rating-icon">
+            <img src="assets/icons/Estrella.svg" alt="Star">
+          </div>
+          <span class="rating-text" id="modalRating">9.5</span>
+        </div>
+
+        <!-- Bloque de duración (rojo/oscuro) -->
+        <div class="modal-duration-badge">
+          <img src="assets/icons/Duracion.svg" alt="Duración" class="duration-icon">
+          <span id="modalDuration">160min</span>
+        </div>
+      </div>
+
+      <!-- Descripción (puede ser larga, hará scroll) -->
+      <p class="info-desc" id="modalDesc">
+        Puntos clave de la trama: El detonante: Walter White, un genio de la química frustrado, recibe la noticia de un cáncer de pulmón inoperable al cumplir 50 años. La alianza: Se asocia con Jesse Pinkman, un antiguo alumno holgazán, para cocinar metanfetamina de alta pureza (color azul) en una autocaravana. Evolución criminal: La necesidad económica se convierte en ambición y poder, transformando a Walt en un narcotraficante despiadado. Conflicto familiar y legal: Walt intenta ocultar su doble vida a su esposa Skyler y a su cuñado Hank, quien es agente de la DEA. La serie, creada por Vince Gilligan, es aclamada por su guion y desarrollo de personajes, mostrando cómo la desesperación puede llevar a una persona corriente a cometer actos terribles.
+      </p>
+
+      <!-- Contenedor del tráiler (YouTube) -->
+      <div class="trailer-wrapper">
+        <iframe src="https://www.youtube.com/embed/HhesaQXLuRY" title="Breaking Bad Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+
+      <!-- Sello MPAA (opcional, lo puedes quitar si no lo quieres) -->
+    </div>
+  </div>
+</div>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const btnAgregar = document.querySelector('.btn-secondary');
@@ -583,5 +634,40 @@
         });
     });
   </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const modalOverlay = document.getElementById('modalOverlay');
+  const closeBtn = document.getElementById('closeModalBtn');
+
+  function openModal() {
+    modalOverlay.classList.add('active');
+    document.body.classList.add('modal-open');
+  }
+
+  function closeModal() {
+    modalOverlay.classList.remove('active');
+    document.body.classList.remove('modal-open');
+  }
+
+  // Asignar clic a todas las tarjetas (solo para abrir, sin modificar contenido)
+  const cards = document.querySelectorAll('.movie-card');
+  cards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.btn-bookmark')) return;
+      openModal();
+    });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalOverlay.classList.contains('active')) closeModal();
+  });
+});
+</script>
+
 </body>
 </html>

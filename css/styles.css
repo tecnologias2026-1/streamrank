@@ -799,38 +799,41 @@ main {
     line-height: 32.5px;
 }
 
-/* 3.4 Tag de Rating */
+/* 3.4 Tag de Rating - CORREGIDO (centrado perfecto) */
 .info-rating {
-    display: flex;
-    height: 38px;
-    padding: 5px 10px;
-    justify-content: center;
-    align-items: center;
-    align-content: space-between;
-    column-gap: 6px;
-    flex-wrap: wrap;
-    border-radius: 8px;
-    border: 1px solid rgba(240, 177, 0, 0.20); /* Le bajé un poco la opacidad al borde para que combine mejor */
-    background: rgba(240, 177, 0, 0.10); /* Aquí está tu fondo amarillo al 10% */
+  display: inline-flex;        /* Cambia de 'flex' a 'inline-flex' */
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 12px;             /* Ajusta el padding horizontal */
+  border-radius: 8px;
+  border: 1px solid rgba(240, 177, 0, 0.20);
+  background: rgba(240, 177, 0, 0.10);
+  flex-wrap: nowrap;           /* Evita que se envuelva */
 }
 
 .rating-icon {
-    display: flex;
-    width: 20px;
-    height: 20px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rating-icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .rating-text {
-    color: #F0B100;
-    text-align: center;
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 20px;
+  line-height: 1;
+  color: #F0B100;
+  font-weight: 700;
+  font-size: 16px;
 }
 
 /* 4. Contenedor de la Derecha */
@@ -907,3 +910,200 @@ main {
     flex-shrink: 0;
 }
 
+/* ========== MODAL CON SCROLL FUNCIONAL ========== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.2s, opacity 0.25s ease;
+  padding: 1.5rem;
+}
+
+.modal-overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.floating-card {
+  max-width: 800px;
+  width: 100%;
+  max-height: 85vh;
+  background: #0F172B;
+  border-radius: 32px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  transform: scale(0.95);
+  transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.active .floating-card {
+  transform: scale(1);
+}
+
+/* Cabecera fija con la X */
+.modal-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 1rem 0 1rem;
+  background: #0F172B;
+  flex-shrink: 0;
+}
+
+.modal-close-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.modal-close-btn:hover {
+  background: #E7000B;
+  transform: scale(1.05);
+}
+
+/* Contenido scrollable */
+.modal-content {
+  padding: 0 2rem 2rem 2rem;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Scrollbar personalizada */
+.modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+.modal-content::-webkit-scrollbar-track {
+  background: #1e2a3a;
+  border-radius: 10px;
+}
+.modal-content::-webkit-scrollbar-thumb {
+  background: #E7000B;
+  border-radius: 10px;
+}
+
+/* Tags dentro del modal */
+.modal-tags {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* Título dentro del modal */
+.modal-content .info-title {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* Contenedor de rating + duración en el modal */
+.modal-rating-duration {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Reutilizamos la misma clase .info-rating (ya corregida arriba) */
+/* Solo para la duración, creamos una clase específica del modal */
+.modal-duration-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+  white-space: nowrap;
+  border: 1px solid #CAD5E2;
+  background: none;
+  color: #CAD5E2;;
+}
+
+.modal-duration-badge .duration-icon {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.modal-duration-badge .duration-icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.modal-duration-badge span {
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+  color: inherit;
+}
+
+/* Descripción larga dentro del modal */
+.modal-content .info-desc {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #CAD5E2;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+/* Contenedor del trailer */
+.trailer-wrapper {
+  margin-top: 0.5rem;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.trailer-wrapper iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  border: none;
+}
+
+/* Responsive */
+@media (max-width: 550px) {
+  .modal-content {
+    padding: 0 1.2rem 1.2rem 1.2rem;
+  }
+  .modal-content .info-title {
+    font-size: 1.8rem;
+  }
+}
+
+body.modal-open {
+  overflow: hidden;
+}
