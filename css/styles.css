@@ -270,17 +270,29 @@ body {
   margin: 0;
 }
 
+
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    align-self: stretch;
+    width: 100%;
+    padding-bottom: 60px; 
+}
+
 /* ============================================================== */
 /* NUEVA SECCIÓN HERO                         */
 /* ============================================================== */
 
 .hero {
     display: flex;
-    padding: 60px 20px;
+    padding: 60px 40px;
     justify-content: space-between;
     align-items: center;
-    align-self: stretch;
-    gap: 40px; 
+    align-self: stretch; 
+    box-sizing: border-box;
 }
 
 /* --- CONTENEDOR INFO --- */
@@ -424,3 +436,474 @@ body {
     border-radius: 23px; 
     background-color: lightgray; /* Color de fondo por si la imagen tarda en cargar */
 }
+
+/* ============================================================== */
+/* SECCIÓN FILTROS                                                */
+/* ============================================================== */
+
+/* Contenedor principal de toda la sección */
+.filters-section {
+    display: flex;
+    padding: 20px 40px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    align-self: stretch;
+    box-sizing: border-box;
+}
+
+/* Primer contenedor (El borde sutil que envuelve el toggle) */
+.filters-top-wrapper {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    align-content: center;
+    gap: 19px;
+    flex-wrap: wrap;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Contenedor de los 3 botones */
+.content-type-toggle {
+    display: flex;
+    width: 413px;
+    align-items: center;
+    align-content: center;
+    gap: 19px;
+    flex-wrap: wrap;
+    border-radius: 12px;
+    background: #454953;
+}
+
+/* Estilo base para los botones (Películas y Series) */
+.toggle-btn {
+    display: flex;
+    width: 125px; 
+    height: 40px;
+    padding: 0 16px; /* Ajustado para no romper el centrado vertical */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    gap: 6px; /* Espacio entre el icono y el texto */
+    
+    border-radius: 12px;
+    background: transparent; /* Lo hacemos transparente porque el contenedor ya es gris */
+    border: none;
+    cursor: pointer;
+    
+    /* Tipografía */
+    color: #9CA3AF; /* Gris claro, ajusta si tienes una variable */
+    font-family: var(--font-main);
+    font-size: 16px;
+    font-weight: 500;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Estilo específico para el botón ACTIVO (Todos) */
+.toggle-btn.active {
+    flex: 1 0 0; /* Hace que llene el espacio disponible */
+    background: #E7000B; 
+    color: #FFFFFF; 
+}
+
+/* Evitar que los íconos se deformen */
+.toggle-btn .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Controla el tamaño de las imágenes dentro de los íconos de los filtros */
+.toggle-btn .icon img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+/* Pequeño efecto hover para los botones inactivos */
+.toggle-btn:not(.active):hover {
+    background: #565a66;
+    color: var(--color-text-primary);
+}
+
+/* ============================================================== */
+/* SEGUNDO CONTENEDOR: BARRA DE FILTROS INFERIOR                  */
+/* ============================================================== */
+
+/* Contenedor principal (Fondo oscuro) */
+.filters-bottom-wrapper {
+    display: flex;
+    padding: 10px;
+    justify-content: space-between; /* Esta es la clave para separar los grupos a los extremos */
+    align-items: flex-start;
+    align-content: space-between;
+    align-self: stretch;
+    flex-wrap: wrap;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: #060B1E;
+}
+
+/* ================= GRUPO IZQUIERDO ================= */
+.filters-dropdown-group {
+    display: flex;
+    padding: 12px 0;
+    align-items: center;
+    align-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+/* Botones desplegables (Género, Duración) */
+.dropdown-btn {
+    display: flex;
+    padding: 12px;
+    align-items: center;
+    gap: 57px; /* Separación larga entre el texto y la flecha */
+    border-radius: 14px;
+    background: #020618;
+    border: none;
+    cursor: pointer;
+    
+    color: var(--color-text-muted, #9CA3AF); /* Usamos gris claro para el texto */
+    font-family: var(--font-main);
+    font-size: 16px;
+    transition: background 0.2s ease;
+}
+
+.dropdown-btn:hover {
+    background: #1B1F2F;
+}
+
+/* Envoltorio para el icono y el texto dentro del botón */
+.dropdown-content-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* ================= GRUPO DERECHO ================= */
+.filters-sort-group {
+    display: flex;
+    padding: 12px 0;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+/* Contenedor de los botones de ordenamiento */
+.sort-toggle-wrapper {
+    display: flex;
+    height: 44px;
+    padding: 12px;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+    gap: 4px;
+    flex-wrap: wrap;
+    border-radius: 14px;
+    background: #020618;
+}
+
+/* Botones de ordenamiento (Rating, Popularidad) */
+.sort-btn {
+    display: flex;
+    padding: 8px 11px; /* Añadí un ligero padding vertical para que tome forma */
+    justify-content: center;
+    align-items: center;
+    align-content: space-between;
+    column-gap: 6px;
+    flex-wrap: wrap;
+    border-radius: 8px;
+    background: transparent; /* Transparente por defecto */
+    border: none;
+    cursor: pointer;
+    
+    color: var(--color-text-muted, #9CA3AF);
+    font-family: var(--font-main);
+    font-size: 16px;
+}
+
+/* Botón de ordenamiento activo (Rating) */
+.sort-btn.active {
+    background: #1B1F2F;
+    color: var(--color-text-primary, #FFFFFF);
+}
+
+/* Regla general para mantener los íconos de esta sección en su tamaño correcto */
+.filters-bottom-wrapper img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+/* ============================================================== */
+/* SECCIÓN TOP 10 - TARJETA MAESTRA                               */
+/* ============================================================== */
+
+/* Esta es la sección que envuelve a la lista */
+.top-10-section {
+    display: flex;
+    padding: 20px 40px; /* Mismo padding horizontal que los demás */
+    flex-direction: column;
+    align-self: stretch;
+    box-sizing: border-box;
+}
+/* Contenedor que agrupa las 10 tarjetas */
+.top-10-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px; /* Esto se encarga de separar cada carta automáticamente */
+    align-self: stretch;
+    padding: 0px;
+}
+
+/* Contenedor principal de la tarjeta */
+.movie-card {
+    display: flex;
+    padding: 16px;
+    align-items: center;
+    gap: 24px;
+    align-self: stretch;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: #060B1E;
+    /* margin-bottom eliminado */
+}
+
+/* 1. Círculo con número */
+.card-number {
+    display: flex;
+    width: 57px;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px; /* Redondeado tipo píldora/círculo */
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: #1D293D;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.10), 0 4px 6px -4px rgba(0, 0, 0, 0.10);
+    
+    /* Tipografía */
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px;
+}
+
+/* 2. Contenedor de la imagen */
+.card-image-wrapper {
+    display: flex;
+    width: 140px;
+    height: 205px;
+    padding: 1px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.00);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden; /* Para que la imagen no se salga de los bordes redondeados */
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 23px; /* Un px menos que el contenedor para encajar perfecto */
+}
+
+/* 3. Información de la tarjeta (Centro) */
+.card-info {
+    display: flex;
+    padding: 7px 17px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 7px;
+    flex: 1 0 0; /* Empuja el contenedor derecho hacia el borde */
+}
+
+/* 3.1 Contenedor de los tags superiores */
+.info-top-tags {
+    display: flex;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 7px;
+    align-self: stretch;
+    flex-wrap: wrap;
+}
+
+
+.tag-type {
+    display: flex;
+    height: 34px;
+    padding: 4px 10px; /* Ajustado para dar el mismo respiro del Hero */
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px; /* Radio típico del tag del Hero */
+    background: rgba(231, 0, 11, 0.20); /* Fondo rojizo translúcido */
+    
+    color: #FF6467; 
+    font-family: 'Inter', sans-serif;
+    font-size: 14px; /* Ajustado a lo que pediste */
+    font-weight: 700;
+    letter-spacing: 1px; /* Un poco de espaciado para que resalte más */
+}
+
+.tag-genre {
+    display: flex;
+    height: 34px;
+    padding: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+    
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32.5px;
+}
+
+/* 3.2 Título */
+.info-title {
+    align-self: stretch;
+    margin: 0;
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32.5px;
+}
+
+/* 3.3 Descripción */
+.info-desc {
+    align-self: stretch;
+    margin: 0;
+    color: #CAD5E2;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 32.5px;
+}
+
+/* 3.4 Tag de Rating */
+.info-rating {
+    display: flex;
+    height: 38px;
+    padding: 5px 10px;
+    justify-content: center;
+    align-items: center;
+    align-content: space-between;
+    column-gap: 6px;
+    flex-wrap: wrap;
+    border-radius: 8px;
+    border: 1px solid rgba(240, 177, 0, 0.20); /* Le bajé un poco la opacidad al borde para que combine mejor */
+    background: rgba(240, 177, 0, 0.10); /* Aquí está tu fondo amarillo al 10% */
+}
+
+.rating-icon {
+    display: flex;
+    width: 20px;
+    height: 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.rating-text {
+    color: #F0B100;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+}
+
+/* 4. Contenedor de la Derecha */
+.card-actions {
+    display: flex;
+    height: 85px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tag-platform {
+    display: flex;
+    height: 34px;
+    padding: 5px 10px;
+    justify-content: center;
+    align-items: center;
+    align-content: space-between;
+    column-gap: 6px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    
+    border-radius: 6px;
+    background: #E7000B; /* Rojo Netflix */
+    color: #FFF;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 2px;
+}
+
+.btn-bookmark {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    border: 1px solid #D9C7C7;
+    background: #959191;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-bookmark.active {
+    background: rgba(231, 0, 11, 0.20); /* Fondo rojizo oscuro translúcido */
+    border: 1px solid rgba(251, 44, 54, 0.30); /* Borde rojo vivo */
+}
+
+.btn-bookmark.active:hover {
+    background: rgba(231, 0, 11, 0.15); /* Mismo fondo rojizo */
+    border: 1px solid #E7000B;          /* Mismo borde rojo */
+    
+}
+
+
+.btn-bookmark {
+    /* ... (tus estilos actuales) ... */
+    transition: all 0.3s ease; 
+}
+
+.btn-bookmark:hover {
+    background: #7a7676;
+}
+
+.bookmark-icon {
+    width: 10.438px;
+    height: 18.425px;
+    flex-shrink: 0;
+}
+
