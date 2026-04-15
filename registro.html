@@ -207,6 +207,20 @@
 
 
 <script>
+/* =========================
+   🔥 "BASE DE DATOS" LOCAL
+   ========================= */
+function getUsers() {
+  return JSON.parse(localStorage.getItem('users')) || [];
+}
+
+function saveUsers(users) {
+  localStorage.setItem('users', JSON.stringify(users));
+}
+
+/* =========================
+   MODAL LOGIN
+   ========================= */
 function abrirModal() {
   document.getElementById('modalOverlay').style.display = 'block';
   document.getElementById('modalLogin').style.display = 'flex';
@@ -219,11 +233,16 @@ function cerrarModal() {
   document.body.style.overflow = '';
 }
 
-// ESCAPE
+/* =========================
+   ESCAPE CLOSE
+   ========================= */
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') cerrarModal();
 });
 
+/* =========================
+   LOGIN REAL
+   ========================= */
 function simularLogin() {
   const email = document.getElementById('loginEmail').value.trim();
   const pass = document.getElementById('loginPassword').value.trim();
@@ -231,27 +250,37 @@ function simularLogin() {
   const emailError = document.getElementById('loginEmailError');
   const passError = document.getElementById('loginPassError');
 
-  let valido = true;
-
-  // RESET VISUAL
   emailError.style.display = 'none';
   passError.style.display = 'none';
 
-  // VALIDACIÓN EMAIL
+  let valido = true;
+
+  // VALIDACIÓN UI
   if (!email.includes('@gmail')) {
     emailError.style.display = 'block';
     valido = false;
   }
 
-  // VALIDACIÓN PASSWORD
   if (pass.length < 8) {
     passError.style.display = 'block';
     valido = false;
   }
 
   if (!email || !pass) return;
-
   if (!valido) return;
+
+  let users = getUsers();
+  let usuario = users.find(u => u.email === email);
+
+  if (!usuario) {
+    alert('Este correo no está registrado. Debes crear una cuenta.');
+    return;
+  }
+
+  if (usuario.password !== pass) {
+    alert('Contraseña incorrecta');
+    return;
+  }
 
   localStorage.setItem('sesionRank', 'activa');
   localStorage.setItem('correoRank', email);
@@ -260,6 +289,52 @@ function simularLogin() {
   actualizarEstadoUsuario();
 }
 
+/* =========================
+   REGISTRO
+   ========================= */
+function simularRegistro() {
+  const email = document.getElementById('regEmail').value.trim();
+  const pass = document.getElementById('regPassword').value.trim();
+
+  if (!email || !pass) {
+    alert('Completa los datos');
+    return;
+  }
+
+  if (!email.includes('@gmail')) {
+    alert('Debe ser un correo @gmail');
+    return;
+  }
+
+  if (pass.length < 8) {
+    alert('La contraseña debe tener mínimo 8 caracteres');
+    return;
+  }
+
+  let users = getUsers();
+
+  let existe = users.find(u => u.email === email);
+
+  if (existe) {
+    alert('Este correo ya está registrado. Inicia sesión.');
+    return;
+  }
+
+  users.push({
+    email: email,
+    password: pass
+  });
+
+  saveUsers(users);
+
+  alert('Registro exitoso. Ahora inicia sesión.');
+
+  cerrarRegistro();
+}
+
+/* =========================
+   MODAL REGISTRO
+   ========================= */
 function abrirRegistro() {
   cerrarModal();
   document.getElementById('modalOverlay').style.display = 'block';
@@ -277,30 +352,8 @@ function irALogin() {
   abrirModal();
 }
 
-function simularRegistro() {
-  const email = document.getElementById('regEmail').value.trim();
-  const pass = document.getElementById('regPassword').value.trim();
-
-  // 🔴 NO BORRADO: validación original conservada
-  if (!email || !pass) {
-    alert('Por favor completa los datos de registro');
-    return;
-  }
-
-  if (!email.includes('@gmail')) {
-    alert('El correo debe contener "@gmail"');
-    return;
-  }
-
-  localStorage.setItem('sesionRank', 'activa');
-  localStorage.setItem('correoRank', email);
-
-  cerrarRegistro();
-  actualizarEstadoUsuario();
-}
-
 /* =========================
-   🔥 ESTADO GLOBAL CORREGIDO
+   ESTADO USUARIO
    ========================= */
 function actualizarEstadoUsuario() {
   const btnIngresar = document.getElementById('btnIngresar');
@@ -309,7 +362,6 @@ function actualizarEstadoUsuario() {
 
   if (sesion === 'activa' && correo) {
 
-    // cambia a correo
     btnIngresar.textContent = correo;
 
     btnIngresar.onclick = function () {
@@ -323,25 +375,22 @@ function actualizarEstadoUsuario() {
     };
 
   } else {
-
-    // 🔴 IMPORTANTE: vuelve a estado inicial correcto
     btnIngresar.textContent = 'Ingresar';
     btnIngresar.onclick = abrirModal;
 
-    // ocultar ajustes SIEMPRE si no hay sesión
     document.getElementById('ajustes-cuenta').style.display = 'none';
     document.getElementById('ajustes-titulo').style.display = 'none';
   }
 }
 
 /* =========================
-   🚀 INICIO
+   INICIO
    ========================= */
 document.addEventListener('DOMContentLoaded', function () {
 
   actualizarEstadoUsuario();
 
-  // 🔵 NO BORRADO: aviso de guardar ajustes (lo tuyo intacto)
+  // GUARDAR AJUSTES
   var btnGuardar = document.getElementById('btnGuardarAjustes');
   var aviso = document.getElementById('ajustes-aviso');
 
@@ -355,7 +404,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // 🔵 CERRAR SESIÓN CORREGIDO (solo añade limpieza)
+  // CERRAR SESIÓN
   var btnCerrarSesion = document.getElementById('btnCerrarSesionAjustes');
 
   if (btnCerrarSesion) {
@@ -364,12 +413,18 @@ document.addEventListener('DOMContentLoaded', function () {
       localStorage.removeItem('sesionRank');
       localStorage.removeItem('correoRank');
 
-      // reset visual inmediato
-      actualizarEstadoUsuario();
-
       location.reload();
     });
   }
+
+  // limpiar errores al escribir
+  document.getElementById('loginEmail').addEventListener('input', function () {
+    document.getElementById('loginEmailError').style.display = 'none';
+  });
+
+  document.getElementById('loginPassword').addEventListener('input', function () {
+    document.getElementById('loginPassError').style.display = 'none';
+  });
 });
 </script>
 </body>
