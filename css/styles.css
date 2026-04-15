@@ -1108,39 +1108,166 @@ body.modal-open {
   overflow: hidden;
 }
 
+/* ========== ESTILOS PARA LA SECCIÓN TOP 10 (PLATAFORMAS, ESTUDIOS, SAGAS) ========== */
+.top10-categories {
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+  align-self: stretch;
+}
+
+.category-container {
+  display: flex;
+  padding: 16px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: #060B1E;
+}
+
+.category-title {
+  display: flex;
+  padding: 8px;
+  align-items: center;
+  align-content: space-between;
+  column-gap: 6px;
+  align-self: stretch;
+  flex-wrap: wrap;
+  color: #8D95A5;
+  font-family: 'Inter', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.cards-wrapper {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  gap: 24px;
+  align-self: stretch;
+  flex-wrap: wrap;
+}
+
+.platform-card {
+  display: flex;
+  width: 292px;
+  height: 158px;
+  padding: 24px;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 4px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-size: cover;
+  background-position: center;
+  /* Gradiente oscuro para mejorar legibilidad del texto */
+  background-image: linear-gradient(0deg, rgba(0,0,0,0.7), rgba(0,0,0,0.4));
+}
+
+.platform-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+/* Fondos específicos para cada carta (puedes cambiarlos por imágenes reales) */
+.card-netflix { background-image: linear-gradient(0deg, rgba(0,0,0,0.7), rgba(0,0,0,0.4)), url('https://upload.wikimedia.org/wikipedia/commons/1/15/Logonfx.png'); }
+.card-disney { background-image: linear-gradient(0deg, rgba(0,0,0,0.7), rgba(0,0,0,0.4)), url('https://www.digital-news.it/img/primo_piano/foto_grandi/2020/03/1583404857-disney.jpg'); }
+.card-hbo { background-image: linear-gradient(0deg, rgba(0,0,0,0.7), rgba(0,0,0,0.4)), url('https://wallpapercat.com/w/full/3/d/7/1263360-3840x2160-desktop-4k-hbo-wallpaper.jpg'); }
+.card-amazon { background-image: linear-gradient(0deg, rgba(0,0,0,0.7), rgba(0,0,0,0.4)), url('https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/prime-video.png'); }
+.card-marvel { background-image: linear-gradient(0deg, rgba(0,0,0,0.7), rgba(0,0,0,0.4)), url('https://upload.wikimedia.org/wikipedia/commons/b/b1/Marvel_Studios_Inc.webp'); }
+.card-Warner { background-image: linear-gradient(0deg, rgba(0,0,0,0.7), rgba(0,0,0,0.4)), url('https://entertainment.time.com/wp-content/uploads/sites/3/2012/09/warner_bros-_pictures_intro.jpg?w=720&h=480&crop=1'); }
+.card-starwars { background-image: linear-gradient(0deg, rgba(0,0,0,0.7), rgba(0,0,0,0.4)), url('https://static.wikia.nocookie.net/esstarwars/images/4/42/StarWarsOpeningLogo.svg/revision/latest?cb=20161007015630'); }
+.card-universal { background-image: linear-gradient(0deg, rgba(0,0,0,0.7), rgba(0,0,0,0.4)), url('https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/img_4543png.png'); }
 
 
+.card-subtitle {
+  display: flex;
+  width: 244px;
+  height: 16px;
+  align-items: flex-start;
+  flex-shrink: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
 
+/* Colores específicos para cada categoría */
+.subtitle-plataforma { color: #FF6467; }
+.subtitle-estudio { color: #5686E1; }
+.subtitle-saga { color: #8B2CF4; }
 
+.card-title {
+  flex: 1 0 0;
+  color: #FFF;
+  font-family: 'Inter', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
 
+/* Responsive */
+@media (max-width: 700px) {
+  .platform-card {
+    width: 100%;
+    height: auto;
+    min-height: 120px;
+  }
+  .card-subtitle, .card-title {
+    width: auto;
+  }
+}
+/* ── DROPDOWNS ── */
+.dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+}
 
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  background: #0F172B;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 100;
+  min-width: 200px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
 
+.dropdown-menu.open {
+  display: block;
+}
 
+.dropdown-option {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.dropdown-option:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+}
