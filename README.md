@@ -262,7 +262,7 @@ El diagrama de secuencia del web scraping automático representa el proceso inte
 
 Colocar aquí el enlace público de Figma:
 
-https://figma.com/xxxxx
+https://www.figma.com/design/d9VySyDjuK3QvUUTd6jkqJ/app_tecnologias?node-id=59-4854&t=iA15ycT9AUkncqoE-1
 
 
 🗄️ 6. Diseño de Base de Datos
