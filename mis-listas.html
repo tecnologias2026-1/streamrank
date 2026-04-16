@@ -7,6 +7,67 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
+  <!-- MODALES (igual en todas las páginas) -->
+  <div id="modalOverlay" class="modal-overlay" onclick="cerrarModal()" style="display:none;"></div>
+
+  <div id="modalLogin" class="modal-login" style="display:none;">
+    <button class="modal-cerrar" type="button" onclick="cerrarModal()">✕</button>
+    <div class="modal-contenido">
+      <div class="modal-encabezado">
+        <h2 class="modal-titulo">Bienvenido de nuevo</h2>
+        <p class="modal-subtitulo">Ingresa tus credenciales para acceder.</p>
+      </div>
+      <div class="modal-campo">
+        <label class="modal-label">Correo electrónico</label>
+        <div class="modal-input-wrapper">
+          <span class="modal-input-icono">✉</span>
+          <input class="modal-input" id="loginEmail" type="email" placeholder="tu@correo.com" />
+          <small id="loginEmailError" style="color:red;display:none;font-size:12px;">El correo debe contener "@gmail"</small>
+        </div>
+      </div>
+      <div class="modal-campo">
+        <label class="modal-label">Contraseña</label>
+        <div class="modal-input-wrapper">
+          <span class="modal-input-icono">🔒</span>
+          <input class="modal-input" id="loginPassword" type="password" placeholder="••••••••" />
+          <small id="loginPassError" style="color:red;display:none;font-size:12px;">Mínimo 8 caracteres</small>
+        </div>
+      </div>
+      <button class="modal-btn-ingresar" type="button" onclick="simularLogin()">Ingresar</button>
+      <p class="modal-pie">¿No tienes cuenta? <a href="javascript:void(0)" class="modal-pie-link" onclick="abrirRegistro()">Regístrate aquí</a></p>
+    </div>
+  </div>
+
+  <div id="modalRegistro" class="modal-login" style="display:none;">
+    <button class="modal-cerrar" type="button" onclick="cerrarRegistro()">✕</button>
+    <div class="modal-contenido">
+      <div class="modal-encabezado">
+        <h2 class="modal-titulo">Crear una cuenta</h2>
+        <p class="modal-subtitulo">Regístrate con tu correo electrónico.</p>
+      </div>
+      <div class="modal-campo">
+        <label class="modal-label">Correo electrónico</label>
+        <div class="modal-input-wrapper">
+          <span class="modal-input-icono">✉</span>
+          <input class="modal-input" id="regEmail" type="email" placeholder="tu@correo.com" />
+        </div>
+      </div>
+      <div class="modal-campo">
+        <label class="modal-label">Contraseña</label>
+        <div class="modal-input-wrapper">
+          <span class="modal-input-icono">🔒</span>
+          <input class="modal-input" id="regPassword" type="password" placeholder="••••••••" />
+        </div>
+      </div>
+      <button class="modal-btn-ingresar" type="button" onclick="simularRegistro()">Registrarse</button>
+      <p class="modal-pie">¿Ya tienes cuenta? <a href="javascript:void(0)" class="modal-pie-link" onclick="irALogin()">Ingresa aquí</a></p>
+    </div>
+  </div>
+
+  <!-- SCRIPT COMPARTIDO -->
+  <script src="js/auth.js"></script>
+
+</body>
 
   <header class="topbar">
     <div class="topbar-inner">
@@ -20,7 +81,7 @@
         <nav class="main-nav" aria-label="Navegación principal">
           <a href="index.html" class="nav-link">Inicio</a>
           <a href="top10.html" class="nav-link">Top 10</a>
-          <a href="mis-listas.html" class="nav-link active">
+          <a href="mis-listas.html" class="nav-link">
             <span class="nav-icon">
               <img src="https://www.figma.com/api/mcp/asset/76e25ff4-db16-4dd6-8a40-b7115513676e" alt="Mis Listas icon" />
             </span>
