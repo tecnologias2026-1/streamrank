@@ -1,5 +1,3 @@
-
-
 🌐 Stream Rank
 
 Top10 de peliculas y series actualizado semanalamente utilizando WebScraping.
@@ -26,16 +24,16 @@ El sistema está orientado a usuarios que consumen regularmente películas y ser
 
 RF1. Registro de usuario
 	 El sistema debe permitir al usuario crear una cuenta para guardar su información y listas personales.
-   
+
 RF2. Inicio de sesión
  	El sistema debe permitir al usuario autenticarse para acceder a sus listas y configuraciones.
-  
+
 RF3. Gestión de perfil
 	 El usuario debe poder acceder a su perfil para visualizar sus listas, calificaciones y contenido guardado.
-   
+
 RF4. Visualización de rankings
 	 El sistema debe mostrar Top 10 dinámicos de películas y series obtenidos mediante web scraping.
-   
+
 RF5. Filtrar por tipo de contenido
 	 El sistema debe permitir filtrar contenido por:
 Películas
@@ -88,25 +86,25 @@ Plataforma disponible
 
 RF13. Visualización de trailer
 	 El sistema debe permitir reproducir el trailer al hacer clic en la imagen de la película o serie.
-   
+
 RF14. Búsqueda de películas o series
 	 El sistema debe permitir al usuario buscar contenido por nombre.
-   
+
 RF15. Visualización de resultados de búsqueda
 	 El sistema debe mostrar la información de la película o serie encontrada.
-   
+
 RF16. Crear lista de “Ver después” (Watchlist)
  	El sistema debe permitir guardar películas o series para ver más adelante.
-  
+
 RF17. Marcar contenido como visto
 	 El sistema debe permitir marcar películas o series como vistas.
-   
+
 RF18. Calificación personal
 	 El usuario debe poder calificar el contenido visto mediante un sistema de estrellas.
-   
+
 RF19. Ordenar contenido por calificación personal
 	 El sistema debe permitir ordenar el contenido visto según la calificación del usuario.
-   
+
 RF20. Seguimiento de series
 	 El sistema debe permitir al usuario registrar:
 temporada actual
@@ -114,16 +112,16 @@ episodio actual
 
 RF21. Crear Top 10 personal
 	 El sistema debe permitir al usuario crear listas personalizadas de películas o series.
-   
+
 RF22. Agregar contenido a Top personal
 	 El usuario debe poder agregar películas o series a sus rankings personales.
-   
+
 RF23. Ordenar manualmente el ranking
 	 El usuario debe poder organizar manualmente el orden del Top 10.
-   
+
 RF24. Web scraping automático
 	 El sistema debe recolectar información pública de sitios como IMDb y Rotten Tomatoes mediante scraping.
-   
+
 RF25. Extracción de datos
  El sistema debe extraer y almacenar información como:
 título
