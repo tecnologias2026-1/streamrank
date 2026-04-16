@@ -23,7 +23,7 @@
         <nav class="main-nav" aria-label="Navegación principal">
           <a href="index.html" class="nav-link active">Inicio</a>
           <a href="top10.html" class="nav-link">Top 10</a>
-          <a href="mis-listas.html" class="nav-link">
+          <a href="#" class="nav-link" id="linkMisListas">
             <span class="nav-icon">
               <img src="https://www.figma.com/api/mcp/asset/76e25ff4-db16-4dd6-8a40-b7115513676e" alt="Mis Listas icon" />
             </span>
@@ -394,6 +394,7 @@ function actualizarEstadoUsuario() {
 
   // 👇 IMPORTANTE: detectar en qué página estás
   const esMisListas = window.location.pathname.includes("mis-listas.html");
+  const vieneDeMisListas = window.location.search.includes("from=mislistas");
 
   const noSesionView = document.getElementById('noSesionView');
 
@@ -420,8 +421,8 @@ function actualizarEstadoUsuario() {
     btnIngresar.onclick = abrirModal;
 
     // ✅ SOLO mostrar esta vista si estás en MIS LISTAS
-    if (esMisListas && noSesionView) {
-      noSesionView.style.display = 'flex';
+    if ((esMisListas || vieneDeMisListas) && noSesionView) {
+  noSesionView.style.display = 'flex';
     } else if (noSesionView) {
       noSesionView.style.display = 'none';
     }
@@ -474,6 +475,19 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('loginPassword').addEventListener('input', function () {
     document.getElementById('loginPassError').style.display = 'none';
   });
+});
+document.getElementById('linkMisListas').addEventListener('click', function(e) {
+  e.preventDefault();
+
+  const sesion = localStorage.getItem('sesionRank');
+
+  if (sesion === 'activa') {
+    // ⚠️ Solo si EXISTE la página real
+    window.location.href = 'mis-listas.html';
+  } else {
+    // ✅ Esto es lo que tú necesitas
+    window.location.href = 'registro.html?from=mislistas';
+  }
 });
 </script>
 </body>
